@@ -4,13 +4,10 @@ import java.util.ArrayDeque;
 
 public class Solution {
     public static int[] minWindowArrK(int[] intArr, int k) {
-        if (k == 1) {
-            return intArr;
-        }
         ArrayDeque<Integer> deque = new ArrayDeque<>();
         for (int i = 0; i < k; i++) {
-            while (!deque.isEmpty() && intArr[deque.peek()] >= intArr[i]) {
-                deque.poll();
+            while (!deque.isEmpty() && intArr[deque.peekLast()] >= intArr[i]) {
+                deque.pollLast();
             }
             deque.add(i);
         }
@@ -20,8 +17,8 @@ public class Solution {
             while (!deque.isEmpty() && deque.peek() <= i - k) {
                 deque.poll();
             }
-            while (!deque.isEmpty() && intArr[deque.peek()] >= intArr[i]) {
-                deque.poll();
+            while (!deque.isEmpty() && intArr[deque.peekLast()] >= intArr[i]) {
+                deque.pollLast();
             }
             deque.add(i);
         }
